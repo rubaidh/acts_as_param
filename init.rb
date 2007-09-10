@@ -1,1 +1,1 @@
-# Include hook code here
+require 'rubaidh/acts_as_param'
