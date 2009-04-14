@@ -22,7 +22,7 @@ module Rubaidh
       # raises an exception if the record is not found.  This makes it
       # behave more like find(id) which is useful in controllers.
       def find_by_param(param, *args)
-        with_scope :find => { :conditions => ["#{table_name}.param #{attribute_condition(param)}", param] } do
+        with_scope :find => { :conditions => {:param => param} } do
           returning find(:first, *args) do |record|
             raise ActiveRecord::RecordNotFound, "Couldn't find #{name} with param=#{param}" if record.blank?
           end
