@@ -1,13 +1,38 @@
 ActsAsParam
 ===========
 
-Introduction goes here.
+acts_as_param is Rails plugin that allows you to parameterize models so that instead of the object.id being used for urls, a custom parameter based on a column name can be specified. Ideal if you don't want to touch Object.to_param for whatever reason!
 
+http://localhost:3000/biscuits/123
+
+acts_as_param will let you do this:
+
+http://localhost:3000/biscuits/penguin
+
+Updated to work with Rails 2.3.2, installs like any regular rails plugin.
 
 Example
 =======
 
-Example goes here.
+Your model:
+
+class Biscuit < ActiveRecord::Base
+  acts_as_param :from => :name
+end
+
+where :from is defining the column name (eg. @biscuit.name)
+
+Your controller:
+Replace Biscuit.find() with .find_by_param()
+
+def show
+  @biscuit = Biscuit.find_by_param(params[:id])
+
+  respond_to do |format|
+    format.html # show.html.erb
+  end
+end
 
 
-Copyright (c) 2007 [name of plugin creator], released under the MIT license
+
+Copyright (c) 2007-2009 Rubaidh Ltd, released under the MIT license
